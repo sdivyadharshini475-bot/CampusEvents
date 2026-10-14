@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f8fc;
+    color: #052f53;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: white;
+}
+.navbar h3 {
+    color: #164e8b;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-links a {
+    text-decoration: none;
+    color: #0f2748;
+    font-size: 14px;
+}
+.nav-links .register,
+.button {
+    background-color: #0b29bf;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+main {
+    width: 84%;
+    margin: 30px auto;
+}
+.hero {
+    background-color: #e0efff;
+    padding: 45px 30px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+.hero p {
+    margin-bottom: 15px;
+}
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+.hero .button {
+    margin-top: 5px;
+}
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.section-heading p {
+    margin-top: 8px;
+    color: #576e8d;
+}
+.section-heading a {
+    text-decoration: none;
+    color: #07276c;
+}
+.event-container {
+    display: flex;
+    gap: 20px;
+}
+.event-card {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px #00000010;
+}
+.event-image {
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.tech {
+    background-image: url("https://cdn.pixabay.com/photo/2023/05/23/12/35/ai-generated-8012676_1280.jpg");
+    color: #e2e5ea;
+}
+.culture {
+    background-image: url("https://img.freepik.com/premium-photo/energy-modern-dance-styles-young-people-passionate-man-man-dancing-hiphop-against-gradient-studio-background-neon-light-concept-contemporary-dance-hobby-youth_1028938-480351.jpg");
+    color: #f5eef4;
+}
+.sports {
+    background-image: url("https://www.matsh.co/en/wp-content/uploads/2024/06/Youth-Sports-1024x585.jpg");
+    color: #e2ebea;
+}
+.event-content {
+    padding: 18px;
+}
+.event-content span {
+    background-color: #e0f2fe;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+.event-content h3 {
+    margin: 15px 0 10px;
+}
+.event-content p {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+@media (max-width: 768px) {
+    .navbar,
+    .section-heading {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+    .event-container {
+        flex-direction: column;
+    }
+}
+.categories,
+.schedule,
+.registration {
+    background-color: white;
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #dbe4ee;
+    border-radius: 10px;
+}
+
+.categories {
+    background-color: #eaf4ff;
+    border-color: #d3e6ff;
+}
+.categories h2,
+.schedule h2,
+.registration h2 {
+    margin-bottom: 20px;
+}
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.category-list a {
+    text-decoration: none;
+    background-color: white;
+    color: #021424;
+    border: 1px solid #cfd2d6;
+    padding: 12px 65px;
+    border-radius: 5px;
+}
+.schedule {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,td {
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 1px solid #dbe4ee;
+}
+th {
+    background-color: #0b29bf;
+    color: white;
+}
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group label {
+    font-weight: bold;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.agreement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 0;
+}
+.agreement input {
+    width: 16px;
+    height: 16px;
+}
+.registration button {
+    background-color: #0b29bf;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.registration button:hover {
+    background-color: #164e8b;
+}
+@media (max-width: 768px) {
+    .form-container {
+        grid-template-columns: 1fr;
+    }
+}
+.footer {
+    background-color: #0b29bf;
+    color: white;
+    padding: 30px 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+.footer-bottom {
+    padding: 0;
+    border-top: none;
+}
+.footer-bottom p {
+    color: white;
+    font-size: 18px;
+    margin: 0;
+}

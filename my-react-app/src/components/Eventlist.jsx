@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EventCard from "./Eventcard";
 import AddEvent from "../AddEvent/AddEvent";
 import SearchFilter from "../SearchFilter/SearchFilter";
@@ -39,7 +39,7 @@ const initialEvents = [
   },
 ];
 
-function EventList() {
+function EventList({ onFavoritesCountChange }) {
   const [events, setEvents] = useState(initialEvents);
   const [favorites, setFavorites] = useState([]);
   const [registered, setRegistered] = useState([]);
@@ -48,6 +48,13 @@ function EventList() {
   const [category, setCategory] = useState("All Categories");
 
   const [selectedEventId, setSelectedEventId] = useState(null);
+
+  // Update Navbar Favorites Count
+  useEffect(() => {
+    if (onFavoritesCountChange) {
+      onFavoritesCountChange(favorites.length);
+    }
+  }, [favorites, onFavoritesCountChange]);
 
   // Add Event
   const handleAddEvent = (newEvent) => {
@@ -63,7 +70,7 @@ function EventList() {
     alert("Event Added Successfully!");
   };
 
-  // Register
+  // Register Event
   const handleRegister = (id) => {
     if (registered.includes(id)) {
       alert("You have already registered!");
@@ -86,7 +93,7 @@ function EventList() {
     alert("Registration Successful!");
   };
 
-  // Favorite
+  // Add or Remove Favorite
   const handleFavorite = (id) => {
     setFavorites((previous) =>
       previous.includes(id)
@@ -97,7 +104,9 @@ function EventList() {
 
   // Delete Event
   const handleRemove = (id) => {
-    if (!window.confirm("Delete this event?")) return;
+    if (!window.confirm("Are you sure you want to delete this event?")) {
+      return;
+    }
 
     setEvents((previous) =>
       previous.filter((event) => event.id !== id)
@@ -127,16 +136,25 @@ function EventList() {
 
     if (!event) return;
 
-    const title = window.prompt("Enter Event Title:", event.title);
+    const title = window.prompt(
+      "Enter Event Title:",
+      event.title
+    );
+
     if (title === null || !title.trim()) return;
 
-    const venue = window.prompt("Enter Venue:", event.venue);
+    const venue = window.prompt(
+      "Enter Venue:",
+      event.venue
+    );
+
     if (venue === null || !venue.trim()) return;
 
     const description = window.prompt(
       "Enter Description:",
       event.description
     );
+
     if (description === null || !description.trim()) return;
 
     setEvents((previous) =>
@@ -195,6 +213,7 @@ function EventList() {
   return (
     <section className="events-page">
 
+      {/* Upcoming Events Heading */}
       <header className="events-header">
         <p className="events-eyebrow">
           DISCOVER YOUR CAMPUS

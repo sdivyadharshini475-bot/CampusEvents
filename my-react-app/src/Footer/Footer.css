@@ -1,0 +1,25 @@
+
+.footer {
+  width: 100%;
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.footer h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.footer p {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin: 8px 0;
+}
+
+.footer-copy {
+  margin-top: 18px !important;
+}

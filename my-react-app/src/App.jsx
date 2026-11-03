@@ -1,24 +1,19 @@
 
+import { useState } from "react";
 import "./App.css";
+
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 import EventList from "./components/Eventlist";
 import StudentRegistration from "./StudentRegistration/studentForm";
 
 function App() {
+  const [favoriteCount, setFavoriteCount] = useState(0);
+
   return (
     <div className="App">
 
-      {/* Navigation */}
-      <header className="navbar">
-        <a href="#" className="logo">
-          CampusConnect
-        </a>
-
-        <nav>
-          <a href="#">Home</a>
-          <a href="#events">Events</a>
-          <a href="#registration">Register</a>
-        </nav>
-      </header>
+      <Navbar favoriteCount={favoriteCount} />
 
       {/* Hero Section */}
       <section className="hero">
@@ -46,15 +41,19 @@ function App() {
         </div>
       </section>
 
-      {/* Events Section */}
+      {/* Events */}
       <section id="events">
-        <EventList />
+        <EventList
+          onFavoritesCountChange={setFavoriteCount}
+        />
       </section>
 
-      {/* Student Registration */}
+      {/* Registration */}
       <section id="registration">
         <StudentRegistration />
       </section>
+
+      <Footer />
 
     </div>
   );

@@ -23,6 +23,7 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
+
           <p className="hero-label">
             CONNECT • PARTICIPATE • GROW
           </p>
@@ -41,6 +42,7 @@ function App() {
           <a href="#events" className="hero-button">
             Explore Events
           </a>
+
         </div>
       </section>
 
@@ -49,7 +51,7 @@ function App() {
         <EventList />
       </section>
 
-      {/* Student Registration Section */}
+      {/* Student Registration */}
       <section id="registration">
         <StudentRegistration />
       </section>

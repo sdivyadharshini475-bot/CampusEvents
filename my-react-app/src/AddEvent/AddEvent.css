@@ -1,0 +1,88 @@
+
+.add-event-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.add-event-container h2 {
+  font-size: 17px;
+  color: #172033;
+  margin: 0 0 5px;
+}
+
+.add-event-container p {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.add-event-container form {
+  width: 100%;
+}
+
+.event-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 15px;
+  margin-bottom: 10px;
+}
+
+.add-event-container label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #172033;
+}
+
+.add-event-container input,
+.add-event-container select,
+.add-event-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 12px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.add-event-container textarea {
+  height: 65px;
+  resize: vertical;
+}
+
+.add-event-container input:focus,
+.add-event-container select:focus,
+.add-event-container textarea:focus {
+  outline: none;
+  border-color: #3522ed;
+}
+
+.add-event-container button {
+  background: #3522ed;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-event-container button:hover {
+  background: #2415c7;
+}
+
+@media (max-width: 600px) {
+  .event-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

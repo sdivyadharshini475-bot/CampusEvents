@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import "./studentForm.css";
+import "./StudentForm.css";
 
 function StudentRegistration() {
   const initialForm = {
@@ -19,7 +19,7 @@ function StudentRegistration() {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
-  // Receive selected event from Event Card
+  // Receive event selected from Event Card
   useEffect(() => {
     const handleSelectEvent = (e) => {
       setFormData((previous) => ({
@@ -44,7 +44,7 @@ function StudentRegistration() {
     };
   }, []);
 
-  // Handle Input Changes
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -52,22 +52,28 @@ function StudentRegistration() {
       ...previous,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    if (name === "event") {
+      // Manual dropdown selection
+      setSelectedEventId(null);
+      setSubmitted(false);
+    }
   };
 
-  // Submit Registration
+  // Submit registration
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (selectedEventId === null) {
-      alert("Please select an event from the Events section.");
+    if (!formData.event) {
+      alert("Please choose an event.");
       return;
     }
 
-    // Notify EventList only after successful form submission
     window.dispatchEvent(
       new CustomEvent("registrationCompleted", {
         detail: {
           eventId: selectedEventId,
+          eventTitle: formData.event,
         },
       })
     );
@@ -75,7 +81,7 @@ function StudentRegistration() {
     setSubmitted(true);
   };
 
-  // Reset Form
+  // Reset form
   const handleReset = () => {
     setFormData(initialForm);
     setSelectedEventId(null);
@@ -85,7 +91,6 @@ function StudentRegistration() {
   return (
     <section className="registration-container">
       <div className="registration-card">
-
         <p className="registration-label">SAVE YOUR SEAT</p>
 
         <h2>Student Event Registration</h2>
@@ -95,7 +100,6 @@ function StudentRegistration() {
         </p>
 
         <form onSubmit={handleSubmit}>
-
           <div className="registration-grid">
 
             <div className="form-group">
@@ -144,9 +148,7 @@ function StudentRegistration() {
                 <option value="Mechanical Engineering">
                   Mechanical Engineering
                 </option>
-                <option value="Civil Engineering">
-                  Civil Engineering
-                </option>
+                <option value="Civil Engineering">Civil Engineering</option>
               </select>
             </div>
 
@@ -180,7 +182,6 @@ function StudentRegistration() {
 
             <div className="form-group">
               <label>How will you attend?</label>
-
               <div className="attendance-options">
                 <label>
                   <input
@@ -208,7 +209,6 @@ function StudentRegistration() {
 
             <div className="form-group full-width">
               <label>Choose an event *</label>
-
               <select
                 name="event"
                 value={formData.event}
@@ -261,17 +261,12 @@ function StudentRegistration() {
               Reset Form
             </button>
           </div>
-
         </form>
 
         {submitted && (
           <div className="registration-success">
             <h3>Registration complete!</h3>
-
-            <p>
-              This is a local demonstration. Your details have not been sent
-              to a server.
-            </p>
+            <p>Your registration has been completed successfully.</p>
 
             <ul>
               <li><strong>Student:</strong> {formData.studentName}</li>
@@ -282,7 +277,6 @@ function StudentRegistration() {
             </ul>
           </div>
         )}
-
       </div>
     </section>
   );

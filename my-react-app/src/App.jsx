@@ -1,14 +1,14 @@
-
 import { useState } from "react";
 import "./App.css";
 
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import EventList from "./components/Eventlist";
-import StudentRegistration from "./StudentRegistration/studentForm";
+import StudentRegistration from "./StudentRegistration/StudentForm";
 
 function App() {
   const [favoriteCount, setFavoriteCount] = useState(0);
+  const [isViewingDetails, setIsViewingDetails] = useState(false);
 
   return (
     <div className="App">
@@ -34,24 +34,33 @@ function App() {
             fellow students, and make every moment memorable.
           </p>
 
-          <a href="#events" className="hero-button">
-            Explore Events
-          </a>
+          <div className="hero-buttons">
+            <a href="#events" className="hero-button">
+              Explore Events
+            </a>
+
+            <a href="#registration" className="hero-button">
+              Register for an Event
+            </a>
+          </div>
 
         </div>
       </section>
 
-      {/* Events */}
+      {/* Events Section */}
       <section id="events">
         <EventList
           onFavoritesCountChange={setFavoriteCount}
+          onDetailsViewChange={setIsViewingDetails}
         />
       </section>
 
-      {/* Registration */}
-      <section id="registration">
-        <StudentRegistration />
-      </section>
+      {/* Registration Form - Hidden in Event Details */}
+      {!isViewingDetails && (
+        <section id="registration">
+          <StudentRegistration />
+        </section>
+      )}
 
       <Footer />
 

@@ -39,15 +39,24 @@ const initialEvents = [
   },
 ];
 
-function EventList({ onFavoritesCountChange }) {
+function EventList({
+  onFavoritesCountChange,
+  onDetailsViewChange,
+}) {
   const [events, setEvents] = useState(initialEvents);
   const [favorites, setFavorites] = useState([]);
   const [registered, setRegistered] = useState([]);
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All Categories");
-
   const [selectedEventId, setSelectedEventId] = useState(null);
+
+  // Tell App.jsx whether Event Details is open
+  useEffect(() => {
+    if (onDetailsViewChange) {
+      onDetailsViewChange(selectedEventId !== null);
+    }
+  }, [selectedEventId, onDetailsViewChange]);
 
   // Update Navbar Favorites Count
   useEffect(() => {
@@ -55,6 +64,40 @@ function EventList({ onFavoritesCountChange }) {
       onFavoritesCountChange(favorites.length);
     }
   }, [favorites, onFavoritesCountChange]);
+
+  // Listen for successful registration
+  useEffect(() => {
+    const handleRegistrationCompleted = (e) => {
+      const id = Number(e.detail?.eventId);
+
+      if (!id || registered.includes(id)) return;
+
+      setRegistered((previous) => [...previous, id]);
+
+      setEvents((previous) =>
+        previous.map((event) =>
+          event.id === id
+            ? {
+                ...event,
+                registrations: event.registrations + 1,
+              }
+            : event
+        )
+      );
+    };
+
+    window.addEventListener(
+      "registrationCompleted",
+      handleRegistrationCompleted
+    );
+
+    return () => {
+      window.removeEventListener(
+        "registrationCompleted",
+        handleRegistrationCompleted
+      );
+    };
+  }, [registered]);
 
   // Add Event
   const handleAddEvent = (newEvent) => {
@@ -66,31 +109,39 @@ function EventList({ onFavoritesCountChange }) {
         registrations: 0,
       },
     ]);
-
-    alert("Event Added Successfully!");
   };
 
-  // Register Event
+  // Register Event - Go to Registration Form
   const handleRegister = (id) => {
+    const event = events.find((item) => item.id === id);
+
+    if (!event) return;
+
     if (registered.includes(id)) {
-      alert("You have already registered!");
+      alert("You have already registered for this event!");
       return;
     }
 
-    setRegistered((previous) => [...previous, id]);
-
-    setEvents((previous) =>
-      previous.map((event) =>
-        event.id === id
-          ? {
-              ...event,
-              registrations: event.registrations + 1,
-            }
-          : event
-      )
+    // Send event details to Registration Form
+    window.dispatchEvent(
+      new CustomEvent("selectEventForRegistration", {
+        detail: {
+          eventId: event.id,
+          eventTitle: event.title,
+        },
+      })
     );
 
-    alert("Registration Successful!");
+    // Close Event Details if open
+    setSelectedEventId(null);
+
+    // Scroll to Registration Form
+    setTimeout(() => {
+      document.getElementById("registration")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 150);
   };
 
   // Add or Remove Favorite
@@ -104,9 +155,11 @@ function EventList({ onFavoritesCountChange }) {
 
   // Delete Event
   const handleRemove = (id) => {
-    if (!window.confirm("Are you sure you want to delete this event?")) {
-      return;
-    }
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+
+    if (!confirmDelete) return;
 
     setEvents((previous) =>
       previous.filter((event) => event.id !== id)
@@ -136,25 +189,16 @@ function EventList({ onFavoritesCountChange }) {
 
     if (!event) return;
 
-    const title = window.prompt(
-      "Enter Event Title:",
-      event.title
-    );
-
+    const title = window.prompt("Enter Event Title:", event.title);
     if (title === null || !title.trim()) return;
 
-    const venue = window.prompt(
-      "Enter Venue:",
-      event.venue
-    );
-
+    const venue = window.prompt("Enter Venue:", event.venue);
     if (venue === null || !venue.trim()) return;
 
     const description = window.prompt(
       "Enter Description:",
       event.description
     );
-
     if (description === null || !description.trim()) return;
 
     setEvents((previous) =>
@@ -169,8 +213,6 @@ function EventList({ onFavoritesCountChange }) {
           : item
       )
     );
-
-    alert("Event Updated Successfully!");
   };
 
   // Reset Filters
@@ -196,7 +238,7 @@ function EventList({ onFavoritesCountChange }) {
     (event) => event.id === selectedEventId
   );
 
-  // Event Details Page
+  // Show Event Details only
   if (selectedEvent) {
     return (
       <EventDetails
@@ -213,7 +255,6 @@ function EventList({ onFavoritesCountChange }) {
   return (
     <section className="events-page">
 
-      {/* Upcoming Events Heading */}
       <header className="events-header">
         <p className="events-eyebrow">
           DISCOVER YOUR CAMPUS

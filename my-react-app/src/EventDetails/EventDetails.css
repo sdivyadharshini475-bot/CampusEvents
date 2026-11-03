@@ -1,80 +1,141 @@
 
-.event-details-container {
-  max-width: 1000px;
-  margin: 25px auto;
-  padding: 20px;
+* {
+  box-sizing: border-box;
 }
+
+/* Main Container */
+
+.event-details-container {
+  width: 100%;
+  max-width: 570px;
+  margin: 35px auto;
+  padding: 0 10px;
+}
+
+/* Back Button */
 
 .back-btn {
-  background: transparent;
-  border: none;
-  color: #3522ed;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
+  display: inline-block;
   margin-bottom: 15px;
+  padding: 7px 12px;
+  background: #e5e7eb;
+  border: none;
+  border-radius: 4px;
+  color: #172033;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
+.back-btn:hover {
+  background: #d1d5db;
+}
+
+/* Event Details Card */
+
 .event-details-card {
-  background: white;
+  width: 100%;
+  padding: 23px 25px;
+  background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 9px;
-  padding: 25px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Category and Event ID */
+
+.details-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .details-category {
   display: inline-block;
-  background: #edeaff;
-  color: #3522ed;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 5px 9px;
+  background: #eef2ff;
+  color: #5145d8;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
+
+.details-event-id {
+  color: #64748b;
+  font-size: 10px;
+}
+
+/* Event Title */
 
 .event-details-card h1 {
+  margin: 0 0 12px;
   color: #172033;
-  font-size: 26px;
-  margin: 15px 0;
+  font-size: 23px;
+  font-weight: 700;
 }
 
+/* Description */
+
 .details-description {
+  margin: 0 0 18px;
   color: #64748b;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
+/* Event Information */
+
 .details-info {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 16px;
   background: #f8fafc;
-  padding: 15px;
-  border-radius: 7px;
-  margin-top: 20px;
+  border-radius: 5px;
 }
 
 .details-info p {
-  font-size: 13px;
-  margin: 10px 0;
+  margin: 5px 0;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.5;
 }
+
+.details-info strong {
+  color: #172033;
+}
+
+/* Action Buttons */
 
 .details-buttons {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 17px;
 }
 
 .details-register-btn,
 .details-favorite-btn {
-  padding: 10px 15px;
+  padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 .details-register-btn {
-  background: #3522ed;
-  color: white;
+  background: #5145d8;
+  color: #ffffff;
+}
+
+.details-register-btn:hover {
+  background: #3f35bd;
 }
 
 .details-register-btn:disabled {
@@ -83,6 +144,31 @@
 }
 
 .details-favorite-btn {
-  background: #f3e9c8;
-  color: #6b5310;
+  background: #e5e7eb;
+  color: #172033;
+}
+
+.details-favorite-btn:hover {
+  background: #d1d5db;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+  .event-details-container {
+    margin: 20px auto;
+    padding: 0 12px;
+  }
+
+  .event-details-card {
+    padding: 18px;
+  }
+
+  .event-details-card h1 {
+    font-size: 21px;
+  }
+
+  .details-buttons {
+    gap: 8px;
+  }
 }
